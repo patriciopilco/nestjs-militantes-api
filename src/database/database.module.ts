@@ -18,10 +18,12 @@ import config from '../config'
                 dbName 
             } = configService.mongo;
            return{
-            uri: `${connection}://${host}:${port}`,
+            uri: `${connection}://${host}`,
             user,
             pass: password,
             dbName,
+            w: 'majority',
+            retryWrites: true
            }
         },
         inject: [config.KEY],
@@ -32,14 +34,14 @@ import config from '../config'
             provide: 'MONGO',
             useFactory: async ( configService: ConfigType<typeof config>) => {
                 const { connection, user, password, host, port, dbName } = configService.mongo;
-                const uri = `${connection}://${user}:${password}@${host}:${port}/?authMechanism=DEFAULT`;
+                const uri = `${connection}://${user}:${password}@${host}/?retryWrites=true&w=majority`;
                 const client = new MongoClient(uri);
                 await client.connect();
                 const database = client.db(dbName);
                 return database;
             },
             inject: [config.KEY]
-        }
+        },
     ],
     exports: ['MONGO', MongooseModule],
 })

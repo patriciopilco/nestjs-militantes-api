@@ -2,9 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreatePersonaDto } from '../dtos/personas.dtos';
-import { Contacto } from '../entities/contacto.entity';
 import { Persona } from '../entities/persona.entity';
-import { Telefono } from '../entities/telefono.entity';
 import { TelefonosService } from './telefonos.service';
 
 @Injectable()
