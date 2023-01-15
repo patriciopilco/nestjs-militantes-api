@@ -15,7 +15,7 @@ export class PersonasService {
     ) {}
 
     findAll(){
-        return this.personaModel.find().populate('telefono').exec();
+        return this.personaModel.findOne().populate('telefono').exec();
     }
 
     async findByIdentificacion(identificacion: string){
