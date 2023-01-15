@@ -5,11 +5,6 @@
   "author": "Patricio Pilc <patricio.pilco@espoch.tech>",
   "private": true,
   "license": "MIT",
-  "engines": {
-    "node": "16.x",
-    "npm": "~1.0.20",
-    "yarn": "^0.14.0"
-  },
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
