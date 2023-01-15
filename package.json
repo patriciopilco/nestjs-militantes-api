@@ -2,9 +2,9 @@
   "name": "nestjs-militantes-api",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "Patricio Pilc <patricio.pilco@espoch.tech>",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "engines": {
     "node": "16.x",
     "npm": "~1.0.20",
@@ -23,7 +23,8 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "build:digitalOcean": "yarn install --production=false && rimraf dist && yarn build && yarn install --production --frozen-lockfile"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
