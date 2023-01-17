@@ -4,12 +4,14 @@ import { Telefono } from './telefono.entity';
 
 @Schema()
 export class Persona extends Document {
-    @Prop( { required: true} )
+    @Prop( { required: true } )
     identificacion:string;
     @Prop()
     nombres:string;
     @Prop()
     apellidos:string;
+    @Prop()
+    edad:number;
     @Prop( { type: Types.ObjectId, ref: Telefono.name} )
     telefono: Telefono | Types.ObjectId;
 }

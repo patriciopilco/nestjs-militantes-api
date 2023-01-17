@@ -1,7 +1,9 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { CreatePersonaDto } from '../dtos/personas.dtos';
+import { CreatePersonaDto, FilterPersonaDto, UpdatePersonaDto } from '../dtos/personas.dtos';
 import { PersonasService } from '../services/personas.service';
+import { MongoIdPipe } from '../../common/mongo-id/mongo-id.pipe';
+import { ApiOperation } from '@nestjs/swagger';
 
 @Controller('personas')
 export class PersonasController {
@@ -11,8 +13,9 @@ export class PersonasController {
     ){}
 
     @Get()
-    getAllPersons() {
-        return this.personasService.findAll();
+    @ApiOperation({ summary: 'Lista de Personas'})
+    getAllPersons(@Query() params:FilterPersonaDto) {
+        return this.personasService.findAll(params);
     }
 
     @Get(':identificacion')
@@ -30,5 +33,15 @@ export class PersonasController {
     @Post()
     create(@Body() payload: CreatePersonaDto){
         return this.personasService.create(payload);
+    }
+
+    @Put(':id')
+    update(@Param('id', MongoIdPipe) id:string, @Body() payload:UpdatePersonaDto){
+        return this.personasService.update(id, payload);
+    }
+
+    @Delete(':id')
+    delete(@Param('id') id:string){
+        return this.personasService.remove(id);
     }
 }
