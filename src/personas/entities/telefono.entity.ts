@@ -1,5 +1,4 @@
 import { Prop, Schema, SchemaFactory} from '@nestjs/mongoose'
-import { Persona } from './persona.entity'
 import { Document } from 'mongoose';
 
 @Schema()

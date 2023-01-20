@@ -20,14 +20,13 @@ export class PersonasService {
             const filters: FilterQuery<Persona> = {}
             const { limit, offset } = params;
             const { minEdad, maxEdad } = params;
-            Logger.log(`${minEdad}`)
-            Logger.log(`${maxEdad}`)
+            Logger.log(`${params}`)
+
             if (minEdad && maxEdad) {
                 filters.edad = { $gte: minEdad, $lte: maxEdad}
             }
             return this.personaModel.find(filters).populate('telefono').skip(offset).limit(limit).exec();
         }
-        Logger.log('fdsfhdskjfhdskjfhdsjkfh')
         return this.personaModel.find().populate('telefono').exec();
         
     }
@@ -65,5 +64,11 @@ export class PersonasService {
             telefonos
         }
         
+    }
+
+    async removeHabilidad(id:string, habilidadId: string) {
+        const persona = await this.personaModel.findById(id);
+        persona.habilidades.pull(habilidadId);
+        return persona.save();
     }
 }

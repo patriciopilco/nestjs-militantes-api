@@ -41,7 +41,12 @@ export class PersonasController {
     }
 
     @Delete(':id')
-    delete(@Param('id') id:string){
+    remove(@Param('id') id:string){
         return this.personasService.remove(id);
+    }
+
+    @Delete(':id/habilidad/:productId')
+    removeHabilidad(@Param('id') id:string, @Param('productId') productId: string){
+        return this.personasService.removeHabilidad(id,productId);
     }
 }

@@ -1,4 +1,4 @@
-import { IsMongoId,IsNotEmpty, IsOptional, IsPositive, Min, ValidateIf } from 'class-validator';
+import { IsArray, IsMongoId,IsNotEmpty, IsOptional, IsPositive, Min, ValidateIf } from 'class-validator';
 import { ApiProperty, PartialType, OmitType  } from '@nestjs/swagger'
 
 export class CreatePersonaDto {
@@ -19,9 +19,14 @@ export class CreatePersonaDto {
     @IsNotEmpty()
     @IsMongoId()
     telefono: string;
+
+    @IsNotEmpty()
+    @IsArray()
+    habilidades: string[];
 }
 
-export class UpdatePersonaDto extends PartialType( OmitType(CreatePersonaDto, ['identificacion']),) {}
+export class UpdatePersonaDto extends PartialType( 
+    OmitType(CreatePersonaDto, ['identificacion','habilidades']),) {}
 
 export class FilterPersonaDto {
     @IsOptional()

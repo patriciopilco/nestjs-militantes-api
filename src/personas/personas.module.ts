@@ -5,6 +5,7 @@ import { PersonasController } from './controllers/personas.controller';
 import { PersonasService } from './services/personas.service';
 import { TelefonosService } from './services/telefonos.service';
 import { Telefono, TelefonoSchema } from './entities/telefono.entity';
+import { Habilidad, HabilidadSchema } from './entities/habilidad.entity';
 
 @Module({
   imports: [
@@ -16,6 +17,10 @@ import { Telefono, TelefonoSchema } from './entities/telefono.entity';
       {
         name: Telefono.name,
         schema: TelefonoSchema
+      },
+      {
+        name: Habilidad.name,
+        schema: HabilidadSchema
       }
     ]
     )
